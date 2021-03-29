@@ -5,7 +5,7 @@ import random
 
 class Game:
     def __init__(self):
-        self.version = "1.00"
+        self.version = "1.01"
         self.app = Tk()
         self.app.title("Stock Breaker")
         self.app.resizable(False, False)
@@ -142,8 +142,12 @@ class Game:
             rando *= 1000
             self.app.after(rando, self.update_stock_price)
         else:
+            self.display_epilogue()
+
+    def display_epilogue(self):
+        if self.game_over == True:
             self.add_to_news_feed()
-            self.app.after(1000, self.update_stock_price)
+            self.app.after(1000, self.display_epilogue)
 
     def draw_graph(self):
         amnt = int(self.stock.current_price/100)
